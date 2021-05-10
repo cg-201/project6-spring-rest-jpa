@@ -1,6 +1,7 @@
 package com.capgemini.entities;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,8 +25,12 @@ public class Employee {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
+	
+	@Column(unique = true)
 	private String email;
 	private String mobile;
+	private String password;
+	
 	
 	@ManyToOne
 	@JoinColumn(name = "department_id", referencedColumnName = "id")
