@@ -17,6 +17,8 @@ import com.capgemini.exception.EmployeeNotFoundException;
 import com.capgemini.repository.DepartmentRepository;
 import com.capgemini.repository.EmployeeRepository;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/api/employee/")
 public class EmployeeController {
@@ -34,6 +36,7 @@ public class EmployeeController {
 	}
 	
 	
+	@ApiOperation(value = "Find Employee by Id", notes = "Employee id is required field!", response = Employee.class)
 	@GetMapping("/{id}")
 	public Employee findById(@PathVariable int id) {
 		
