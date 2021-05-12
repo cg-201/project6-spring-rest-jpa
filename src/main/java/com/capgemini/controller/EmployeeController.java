@@ -2,6 +2,8 @@ package com.capgemini.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("/api/employee/")
 public class EmployeeController {
+	private static Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 	
 	@Autowired
 	private EmployeeRepository employeeRepository;
@@ -41,7 +44,7 @@ public class EmployeeController {
 	@ApiOperation(value = "Find Employee by Id", notes = "Employee id is required field!", response = Employee.class)
 	@GetMapping("/{id}")
 	public Employee findById(@PathVariable int id) {
-		
+		logger.info("finding user by id");
 		return employeeRepository.findById(id).get();
 	}
 	
