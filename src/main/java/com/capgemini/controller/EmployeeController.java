@@ -68,9 +68,13 @@ public class EmployeeController {
 	
 	
 	@PostMapping("/custom/authenticate")
-	Employee customFindByEmailAndPassword(@RequestBody Employee employee) {
+	ResponseEntity<Employee>  customFindByEmailAndPassword(@RequestBody Employee employee) throws Exception {
+		Employee db = employeeRepository.customFindByEmailAndPassword(employee.getEmail(), employee.getPassword());
+		if(db == null) {
+			throw new Exception("Record not found!");
+		}
 		
-		return employeeRepository.customFindByEmailAndPassword(employee.getEmail(), employee.getPassword());
+		return new ResponseEntity<Employee>(db, HttpStatus.OK);
 	}
 	
 	
