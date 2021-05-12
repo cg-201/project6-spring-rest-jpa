@@ -3,6 +3,8 @@ package com.capgemini.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -73,13 +75,13 @@ public class EmployeeController {
 	
 	
 	@PostMapping("/authenticate")
-	public Employee findByEmailAndPasswordddddd(@RequestBody Employee employee) throws EmployeeNotFoundException {
+	public ResponseEntity<Employee> findByEmailAndPasswordddddd(@RequestBody Employee employee) throws EmployeeNotFoundException {
 		
 		Employee dbemployee = employeeRepository.findByEmailAndPassword(employee.getEmail(), employee.getPassword());
 		if(dbemployee == null) {
 			throw new EmployeeNotFoundException("Employee Not Found");
 		} else {
-			return dbemployee;
+			return new ResponseEntity<Employee>(dbemployee, HttpStatus.OK);
 		}
 		
 	}
